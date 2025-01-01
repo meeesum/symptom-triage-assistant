@@ -1,0 +1,19 @@
+{
+  "id": "severe_bleeding_es",
+  "title": "Sangrado Grave: Sangrado Incontrolable, Toser o Vomitar Sangre",
+  "tags": [
+    "uncontrolled_bleeding",
+    "coughing_up_large_blood",
+    "vomiting_large_blood"
+  ],
+  "language": "es",
+  "source_note": "CONTENIDO DE MARCADOR DE POSICIÓN — traducción no revisada clínicamente del artículo en inglés 'severe_bleeding'. Reemplazar con contenido clínico revisado antes de cualquier despliegue real.",
+  "body": [
+    "Un sangrado que no disminuye ni se detiene después de varios minutos de presión directa y firme — por una lesión, una hemorragia nasal o cualquier otra fuente — es una emergencia médica. También lo es toser una cantidad significativa de sangre (más que rayas o motas en la mucosidad) o vomitar sangre, que puede verse de color rojo brillante o parecer posos de café oscuros.",
+    "Grandes pérdidas de sangre, ya sean externas o internas, pueden provocar un shock — una caída peligrosa de la presión arterial que priva de oxígeno a los órganos del cuerpo. Las señales de shock incluyen latidos rápidos, piel fría y húmeda, mareos, confusión o desmayo, y pueden desarrollarse rápidamente incluso si la persona parece estar alerta al principio.",
+    "Para un sangrado externo incontrolable, aplica presión directa, firme y continua con un paño limpio mientras llamas a los servicios de emergencia — no levantes el paño repetidamente para revisar, ya que esto interrumpe la coagulación. Toser o vomitar una cantidad significativa de sangre necesita evaluación de emergencia incluso si la persona por lo demás se siente bien, ya que la causa subyacente no es algo que se pueda evaluar de forma segura en casa."
+  ],
+  "reviewed": false,
+  "source_type": "placeholder",
+  "added_date": "2026-08-19"
+}
