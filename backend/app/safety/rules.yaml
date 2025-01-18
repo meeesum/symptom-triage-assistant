@@ -1,0 +1,219 @@
+# Deterministic red-flag rules for the triage safety layer.
+#
+# THIS FILE IS THE PRODUCT'S SAFETY BOUNDARY. Any symptom combination that
+# matches an "emergency" rule here bypasses the LLM entirely — the model
+# never gets a chance to hedge, soften, or miss it.
+#
+# Rule evaluation order = list order. Rules are checked top to bottom;
+# the FIRST match wins. Keep emergency rules at the top.
+#
+# match.any_of  -> escalate if ANY listed symptom_id is present
+# match.all_of  -> escalate if ALL listed symptom_ids are present (combinations
+#                  are how we catch things like "chest pain" alone (moderate)
+#                  vs "chest pain" + "shortness_of_breath" + "sweating" (emergency)
+# conditions    -> optional extra gates: severity_at_least, onset_in, context
+
+rules:
+  # ---------------------------------------------------------------- EMERGENCY
+  - id: cardiac_event_pattern
+    tier: emergency
+    description: "Chest pain combined with cardiac-pattern associated symptoms"
+    match:
+      all_of: [chest_pain]
+      any_of: [shortness_of_breath, sweating, pain_radiating_arm_jaw, nausea]
+    guidance: >
+      This symptom combination can indicate a heart attack. Call emergency
+      services (911 or local equivalent) now. Do not drive yourself.
+
+  - id: stroke_fast_pattern
+    tier: emergency
+    description: "FAST stroke indicators: Face, Arm, Speech, Time"
+    match:
+      any_of: [facial_drooping, arm_weakness_one_sided, slurred_speech, sudden_confusion, sudden_vision_loss]
+    guidance: >
+      These symptoms can indicate a stroke, where every minute matters. Call
+      emergency services now and note the time symptoms started.
+
+  - id: anaphylaxis_pattern
+    tier: emergency
+    description: "Signs of a severe allergic reaction"
+    match:
+      any_of: [throat_swelling, difficulty_breathing_severe, widespread_hives_with_swelling]
+    guidance: >
+      This may be a severe allergic reaction (anaphylaxis). Use an epinephrine
+      auto-injector if available and call emergency services immediately.
+
+  - id: severe_breathing_difficulty
+    tier: emergency
+    description: "Severe, uncontrolled difficulty breathing at rest"
+    match:
+      any_of: [difficulty_breathing_severe, cant_speak_full_sentences, blue_lips_or_face]
+    guidance: >
+      Severe difficulty breathing needs emergency care now. Call emergency
+      services.
+
+  - id: uncontrolled_bleeding
+    tier: emergency
+    description: "Bleeding that will not stop with direct pressure"
+    match:
+      any_of: [uncontrolled_bleeding, coughing_up_large_blood, vomiting_large_blood]
+    guidance: >
+      Uncontrolled or heavy bleeding is a medical emergency. Apply firm direct
+      pressure and call emergency services now.
+
+  - id: suicidal_ideation
+    tier: emergency
+    description: "Expressed suicidal ideation or intent"
+    match:
+      any_of: [suicidal_thoughts, self_harm_intent]
+    guidance: >
+      If you are thinking about harming yourself, please reach out right now:
+      call or text 988 (Suicide & Crisis Lifeline, US) or go to the nearest
+      emergency room. You deserve support, and help is available immediately.
+    requires_human_review: true
+
+  - id: pregnancy_severe_bleeding_or_pain
+    tier: emergency
+    description: "Pregnant patient with severe abdominal pain or heavy bleeding"
+    match:
+      any_of: [heavy_vaginal_bleeding, severe_abdominal_pain]
+    conditions:
+      context: { is_pregnant: true }
+    guidance: >
+      This combination during pregnancy needs immediate evaluation. Call
+      emergency services or go to the nearest emergency room now.
+
+  - id: infant_high_fever
+    tier: emergency
+    description: "Any fever in a very young infant — always high risk regardless of appearance"
+    match:
+      any_of: [fever]
+    conditions:
+      context: { age_years_max: 0.25 }  # ~3 months
+    guidance: >
+      Fever in an infant under 3 months old always needs same-hour medical
+      evaluation, even if the baby otherwise seems okay. Contact emergency
+      services or go to the ER now.
+
+  - id: severe_head_injury
+    tier: emergency
+    description: "Head injury with loss of consciousness, vomiting, or confusion"
+    match:
+      all_of: [head_injury]
+      any_of: [loss_of_consciousness, repeated_vomiting, sudden_confusion]
+    guidance: >
+      This combination after a head injury needs emergency evaluation now.
+      Call emergency services.
+
+  - id: unexplained_loss_of_consciousness
+    tier: emergency
+    description: >
+      Fainting/loss of consciousness on its own, with no injury context —
+      added after adversarial eval case combo_01 surfaced that this only
+      escalated when paired with a head injury, missing cardiac, stroke,
+      and other causes of unexplained fainting. See
+      docs/phase3-adversarial-eval.md.
+    match:
+      any_of: [loss_of_consciousness]
+    guidance: >
+      Passing out or losing consciousness — even briefly — should be
+      evaluated as an emergency, since it can be a sign of a heart,
+      neurological, or other serious problem. Call emergency services now.
+
+  - id: severe_headache_red_flag
+    tier: emergency
+    description: >
+      Severe headache (e.g. "worst headache of my life", thunderclap
+      headache) regardless of exact onset timing — added after a code
+      review found that a bare "headache" symptom_id fell through to the
+      self-care fallback rule for ANY severity, since default_mild_acute
+      only gates on severity_at_least: mild (a floor, not a ceiling).
+      Placed before persistent_mild_symptoms/default_mild_acute so a
+      severe headache is caught here first regardless of onset.
+    match:
+      any_of: [headache]
+    conditions:
+      severity_at_least: severe
+    guidance: >
+      A severe headache — especially a sudden one, or the worst you've
+      ever had — can be a sign of a serious condition such as bleeding in
+      the brain. Call emergency services now, or seek immediate care even
+      if it built up rather than starting suddenly.
+
+  # ------------------------------------------------------------------ URGENT
+  - id: chest_pain_isolated
+    tier: urgent
+    description: "Chest pain without other emergency-pattern symptoms"
+    match:
+      any_of: [chest_pain]
+    guidance: >
+      Chest pain should be evaluated promptly even without other symptoms.
+      Seek urgent/same-day medical care. If it worsens or new symptoms
+      appear, call emergency services.
+
+  - id: high_fever_adult
+    tier: urgent
+    description: "High fever in an adult, no other red flags"
+    match:
+      any_of: [fever]
+    conditions:
+      severity_at_least: severe
+    guidance: >
+      A high fever should be evaluated soon. Seek urgent or same-day care,
+      especially if it persists beyond 48 hours or you feel unable to
+      function.
+
+  - id: moderate_breathing_difficulty
+    tier: urgent
+    description: "Noticeable but not severe breathing difficulty"
+    match:
+      any_of: [shortness_of_breath]
+    guidance: >
+      Shortness of breath that is new or worsening should be evaluated
+      urgently. If it becomes severe, call emergency services.
+
+  - id: severe_abdominal_pain_general
+    tier: urgent
+    description: "Severe abdominal pain, non-pregnant, no other emergency markers"
+    match:
+      any_of: [severe_abdominal_pain]
+    guidance: >
+      Severe abdominal pain should be evaluated the same day. Seek urgent
+      care, or emergency care if pain is worsening rapidly or you develop
+      fever, vomiting, or rigidity.
+
+  - id: immunocompromised_infection_signs
+    tier: urgent
+    description: "Any fever or infection signs in an immunocompromised patient"
+    match:
+      any_of: [fever, localized_swelling_redness]
+    conditions:
+      context: { is_immunocompromised: true }
+    guidance: >
+      Because your immune system is compromised, infection signs can
+      escalate quickly. Seek urgent same-day evaluation.
+
+  # ----------------------------------------------------------------- ROUTINE
+  - id: persistent_mild_symptoms
+    tier: routine
+    description: "Mild/moderate symptoms persisting beyond a few days"
+    match:
+      any_of: [cough, sore_throat, headache, joint_pain, rash]
+    conditions:
+      onset_in: [gradual, chronic]
+    guidance: >
+      These symptoms are worth having evaluated. Schedule a routine visit
+      with your primary care provider in the next few days.
+
+  # --------------------------------------------------------------- SELF_CARE
+  - id: default_mild_acute
+    tier: self_care
+    description: "Fallback for mild, acute, non-flagged symptoms"
+    match:
+      any_of: [cough, sore_throat, headache, runny_nose, mild_fatigue]
+    conditions:
+      severity_at_least: mild
+    guidance: >
+      These symptoms can typically be managed at home with rest, fluids, and
+      over-the-counter care. Monitor for worsening — if new symptoms appear
+      or these persist beyond a week, contact your provider.
