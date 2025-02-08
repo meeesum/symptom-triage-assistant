@@ -1,0 +1,84 @@
+name: backend-ci
+
+on:
+  push:
+    paths:
+      - "backend/**"
+      - ".github/workflows/backend-ci.yml"
+  pull_request:
+    paths:
+      - "backend/**"
+      - ".github/workflows/backend-ci.yml"
+
+defaults:
+  run:
+    working-directory: backend
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: "pip"
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Lint (ruff)
+        run: ruff check .
+
+      # No Postgres/Redis service containers needed — the test suite's
+      # zero-setup default (SQLite + fakeredis, see tests/conftest.py) is
+      # deliberately what CI exercises too, same as a fresh local clone.
+      # A separate job below re-runs the suite against real Postgres +
+      # Redis specifically to catch the class of bug that default can't
+      # (see docs/phase5-postgres-migration.md and
+      # docs/phase5b-redis-token-tracking.md for what that already caught).
+      - name: Test (SQLite + fakeredis, zero-setup default)
+        run: python -m pytest -q
+
+  test-against-real-services:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: triage
+          POSTGRES_PASSWORD: triage
+          POSTGRES_DB: triage
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U triage"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 5
+      redis:
+        image: redis:7-alpine
+        ports: ["6379:6379"]
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 5
+    env:
+      DATABASE_URL: postgresql+psycopg://triage:triage@localhost:5432/triage
+      REDIS_URL: redis://localhost:6379/0
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: "pip"
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Test against real Postgres + Redis
+        run: python -m pytest -q
