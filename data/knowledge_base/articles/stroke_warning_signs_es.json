@@ -1,0 +1,12 @@
+{
+  "id": "stroke_warning_signs_es",
+  "title": "Señales de Alerta de un Derrame Cerebral (FAST)",
+  "tags": ["facial_drooping", "arm_weakness_one_sided", "slurred_speech", "sudden_confusion", "sudden_vision_loss", "stroke_fast_pattern"],
+  "language": "es",
+  "source_note": "CONTENIDO DE MARCADOR DE POSICIÓN — traducción no revisada clínicamente del artículo en inglés 'stroke_warning_signs'. Reemplazar con contenido clínico revisado antes de cualquier despliegue real.",
+  "body": [
+    "Un derrame cerebral ocurre cuando se interrumpe el flujo de sangre a una parte del cerebro, y las células cerebrales comienzan a morir en cuestión de minutos. Reconocer las señales rápidamente y buscar atención de emergencia de inmediato puede cambiar significativamente el resultado.",
+    "La sigla en inglés FAST se usa comúnmente para recordar las principales señales de alerta: cara caída de un lado (Face), debilidad o entumecimiento en un brazo (Arm), habla arrastrada o difícil de entender (Speech), y que es hora (Time) de llamar a emergencias en el momento en que aparezca cualquiera de estas señales.",
+    "Otras señales pueden incluir confusión repentina, problemas repentinos para ver en uno o ambos ojos, un dolor de cabeza intenso y repentino sin causa conocida, o problemas repentinos para caminar o mantener el equilibrio. Estos síntomas nunca deben 'esperarse a que pasen' — incluso si desaparecen por sí solos, un episodio temporal puede ser una señal de advertencia de un derrame mayor por venir y aún así requiere evaluación urgente."
+  ]
+}
