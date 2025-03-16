@@ -1,0 +1,21 @@
+{
+  "id": "cardiac_warning_signs_es",
+  "title": "Señales Cardíacas de Alarma: Falta de Aire, Sudoración, Náuseas y Dolor Irradiado",
+  "tags": [
+    "shortness_of_breath",
+    "sweating",
+    "pain_radiating_arm_jaw",
+    "nausea",
+    "cardiac_event_pattern"
+  ],
+  "language": "es",
+  "source_note": "CONTENIDO DE MARCADOR DE POSICIÓN — traducción no revisada clínicamente del artículo en inglés 'cardiac_warning_signs'. Reemplazar con contenido clínico revisado antes de cualquier despliegue real.",
+  "body": [
+    "La falta de aire, el sudor frío, las náuseas y el dolor que se extiende del pecho al brazo, la mandíbula, el cuello o la espalda son los síntomas clásicos asociados con un infarto. Cualquiera de estos por sí solo tiene muchas causas posibles, pero que aparezcan juntos — especialmente junto con dolor u opresión en el pecho — es un patrón que debe tratarse como una emergencia médica.",
+    "Estos síntomas acompañantes importan porque los infartos no siempre se presentan como un dolor de pecho repentino y dramático. Algunas personas, en particular mujeres, adultos mayores y personas con diabetes, experimentan un infarto principalmente como falta de aire, náuseas o fatiga inusual, con solo una molestia leve en el pecho o ninguna en absoluto. Ignorar estos síntomas porque \"el dolor de pecho no es tan fuerte\" puede retrasar un tratamiento que salva vidas.",
+    "Si la falta de aire, la sudoración, las náuseas o el dolor en el brazo o la mandíbula aparecen de repente, juntos, o junto con cualquier molestia en el pecho, llama a los servicios de emergencia en lugar de esperar a ver si los síntomas pasan o intentar conducir hasta un hospital. El tratamiento temprano de un infarto mejora significativamente los resultados, y la suposición más segura cuando aparece este patrón es que podría ser de origen cardíaco hasta que un médico indique lo contrario."
+  ],
+  "reviewed": false,
+  "source_type": "placeholder",
+  "added_date": "2026-08-19"
+}
