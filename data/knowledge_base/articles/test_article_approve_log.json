@@ -1,0 +1,14 @@
+{
+  "id": "test_article_approve_log",
+  "title": "Test Article",
+  "tags": [
+    "test"
+  ],
+  "source_note": "PLACEHOLDER",
+  "body": [
+    "Some body text."
+  ],
+  "reviewed": true,
+  "source_type": "placeholder",
+  "added_date": "2026-08-20"
+}
