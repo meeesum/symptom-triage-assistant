@@ -1,0 +1,31 @@
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+# Alembic-generated migration files — not hand-authored, and "fixing"
+# lint findings in an already-applied, verified migration risks changing
+# what it actually does. Autogenerate's output style (Union[...], quotes)
+# is what it is; new migrations are still reviewed by hand before commit,
+# just not held to this project's general style rules.
+extend-exclude = ["migrations/versions"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "B", "UP", "SIM", "G"]
+ignore = [
+    # B008 flags `Depends(...)` in argument defaults as an anti-pattern —
+    # that's FastAPI's own, correct dependency-injection idiom (used
+    # throughout app/api/), not a bug. Ignored project-wide rather than
+    # noqa'd at ~13 call sites for a pattern that's used everywhere.
+    "B008",
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Long assertion messages (f-strings describing exactly what was expected
+# vs. got) are more useful un-wrapped than they are compliant with the
+# 100-char limit — application code (app/) is held to the stricter
+# standard since that's what ships; tests aren't.
+"tests/*" = ["E501"]
