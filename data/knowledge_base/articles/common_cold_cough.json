@@ -1,0 +1,11 @@
+{
+  "id": "common_cold_cough",
+  "title": "Common Cold, Cough, and Sore Throat",
+  "tags": ["cough", "sore_throat", "runny_nose", "mild_fatigue", "default_mild_acute"],
+  "source_note": "PLACEHOLDER CONTENT — authored for prototype purposes. Replace with reviewed clinical source content before real deployment.",
+  "body": [
+    "A mild cough, sore throat, or runny nose that develops gradually and is not accompanied by high fever, severe pain, or breathing difficulty is most commonly caused by a common cold or other mild viral illness.",
+    "These symptoms are typically self-limiting and improve within one to two weeks with rest, fluids, and over-the-counter symptom relief. Warm liquids, throat lozenges, and adequate sleep are commonly recommended supportive measures.",
+    "A visit to a healthcare provider is worth considering if symptoms last longer than 10 days without improvement, worsen significantly after initially improving, or are accompanied by high fever, difficulty breathing, chest pain, or symptoms that interfere significantly with daily function."
+  ]
+}
