@@ -1,0 +1,11 @@
+{
+  "id": "fever_general",
+  "title": "Fever: General Information for Adults and Children",
+  "tags": ["fever", "high_fever_adult", "infant_high_fever"],
+  "source_note": "PLACEHOLDER CONTENT — authored for prototype purposes. Replace with reviewed clinical source content before real deployment.",
+  "body": [
+    "Fever is the body's natural response to infection or illness and is not itself a disease. In most healthy adults and older children, a fever alone — without other severe symptoms — can often be monitored at home with rest and fluids.",
+    "Fever becomes more concerning when it is very high, lasts more than a couple of days, or comes with symptoms like a stiff neck, severe headache, confusion, difficulty breathing, or a rash that does not fade under pressure.",
+    "In infants under 3 months old, fever is treated differently than in older children or adults: because a young infant's immune system and ability to show other symptoms are both limited, any fever in this age group is considered potentially serious and warrants prompt medical evaluation, even if the infant otherwise seems to be acting normally."
+  ]
+}
