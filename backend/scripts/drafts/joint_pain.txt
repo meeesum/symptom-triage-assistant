@@ -1,0 +1,10 @@
+id: joint_pain
+title: Joint Pain: General Information
+tags: joint_pain, persistent_mild_symptoms
+source_note: PLACEHOLDER CONTENT — authored for prototype purposes. Before any real deployment, replace with reviewed excerpts from a licensed/verified source (e.g. MedlinePlus, CDC, or a clinical partner) and store the actual citation here.
+
+Joint pain can come from many causes — overuse, minor injury, arthritis, or a viral illness — and mild joint pain that comes on gradually often improves with rest, over-the-counter pain relief, and avoiding activities that worsen it.
+
+Joint pain accompanied by significant swelling, warmth, redness, or fever can be a sign of an infected joint or an inflammatory flare that needs prompt evaluation, since an infected joint can cause lasting damage if treatment is delayed. Joint pain following a significant injury, or pain severe enough that the joint cannot bear any weight or be moved, should also be evaluated promptly rather than assumed to be minor.
+
+Joint pain that persists for more than a few days without improvement, or that keeps recurring, is worth discussing with a primary care provider even if it isn't severe — ongoing joint pain can sometimes be an early sign of a condition that responds better to treatment when addressed early.
