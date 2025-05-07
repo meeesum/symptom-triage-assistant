@@ -1,0 +1,43 @@
+# Local Postgres + Redis for development against real backing services
+# instead of the SQLite/fakeredis bootstrap defaults (see
+# backend/app/core/config.py and backend/app/core/redis_client.py).
+# Neither is required — the app runs with zero setup on SQLite + fakeredis
+# — this is for exercising the actual production targets, same as the
+# manual verification in docs/phase5-postgres-migration.md.
+#
+# Usage:
+#   docker-compose up -d
+#   cd backend
+#   export DATABASE_URL=postgresql+psycopg://triage:triage@localhost:5432/triage
+#   export REDIS_URL=redis://localhost:6379/0
+#   python scripts/migrate.py
+#   uvicorn app.main:app --reload
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: triage
+      POSTGRES_PASSWORD: triage
+      POSTGRES_DB: triage
+    ports:
+      - "5432:5432"
+    volumes:
+      - triage_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U triage"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  triage_postgres_data:
