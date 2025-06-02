@@ -1,0 +1,18 @@
+{
+  "id": "suicidal_thoughts_self_harm",
+  "title": "Suicidal Thoughts and Self-Harm: Crisis Support",
+  "tags": [
+    "suicidal_thoughts",
+    "self_harm_intent",
+    "suicidal_ideation"
+  ],
+  "source_note": "PLACEHOLDER CONTENT — authored for prototype purposes. Before any real deployment, replace with reviewed excerpts from a licensed/verified source (e.g. 988 Suicide & Crisis Lifeline, CDC, or a clinical partner) and store the actual citation here.",
+  "body": [
+    "Thoughts of suicide or of harming yourself are a sign that something serious is going on, and they deserve an immediate, compassionate response — not judgment or delay. These thoughts are more common than many people realize, and having them does not mean a plan has to be acted on; reaching out right now is the safest next step.",
+    "If you are thinking about suicide or self-harm, you can call or text 988 (the Suicide & Crisis Lifeline in the US) any time, day or night, to talk with a trained crisis counselor confidentially and free of charge. If you are outside the US, a local emergency number or crisis line can connect you with equivalent support. If there is an immediate danger to your safety, go to the nearest emergency room or call emergency services.",
+    "Support is also available for anyone worried about someone else — you do not need to be certain, and asking someone directly whether they are thinking about suicide does not increase their risk; it opens the door to getting them help. This platform's own safety layer always flags this pattern for human review rather than relying on automated guidance alone."
+  ],
+  "reviewed": false,
+  "source_type": "placeholder",
+  "added_date": "2026-08-18"
+}
