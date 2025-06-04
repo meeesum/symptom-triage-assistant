@@ -1,0 +1,19 @@
+{
+  "id": "severe_breathing_signs_es",
+  "title": "Dificultad Respiratoria Grave: No Poder Hablar, Labios o Cara Morados",
+  "tags": [
+    "cant_speak_full_sentences",
+    "blue_lips_or_face",
+    "severe_breathing_difficulty"
+  ],
+  "language": "es",
+  "source_note": "CONTENIDO DE MARCADOR DE POSICIÓN — traducción no revisada clínicamente del artículo en inglés 'severe_breathing_signs'. Reemplazar con contenido clínico revisado antes de cualquier despliegue real.",
+  "body": [
+    "No poder hablar en oraciones completas por falta de aire, o un color azulado alrededor de los labios, la cara o las puntas de los dedos, son señales de que el cuerpo no está recibiendo suficiente oxígeno. Esto es diferente de la falta de aire común al hacer esfuerzo — son señales de una emergencia respiratoria, cualquiera que sea la causa subyacente (un ataque de asma grave, atragantamiento, una reacción alérgica grave, una afección cardíaca o pulmonar, u otra cosa).",
+    "Un tono azulado en los labios o la cara (cianosis) puede ser sutil, especialmente en tonos de piel más oscuros, donde puede notarse más claramente en los labios, las encías, alrededor de los ojos, o en las palmas y plantas. Nunca debe descartarse como \"solo se ve pálido\" — refleja una caída real en el oxígeno de la sangre y necesita atención inmediata sin importar cómo parezca estar sobrellevándolo la persona.",
+    "Si alguien no puede completar una oración sin jadear por aire, o tiene cualquier decoloración azulada en los labios o la cara, llama a los servicios de emergencia de inmediato. No esperes a ver si mejora, y no intentes llevarlo tú mismo en auto si existe alguna posibilidad de que la respiración se detenga repentinamente en el camino."
+  ],
+  "reviewed": false,
+  "source_type": "placeholder",
+  "added_date": "2026-08-19"
+}
