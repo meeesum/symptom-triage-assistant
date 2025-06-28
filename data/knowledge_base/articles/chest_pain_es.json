@@ -1,0 +1,12 @@
+{
+  "id": "chest_pain_es",
+  "title": "Dolor de Pecho: Información General",
+  "tags": ["chest_pain", "cardiac_event_pattern", "chest_pain_isolated"],
+  "language": "es",
+  "source_note": "CONTENIDO DE MARCADOR DE POSICIÓN — traducción no revisada clínicamente del artículo en inglés 'chest_pain', escrita para fines de prototipo. Antes de cualquier despliegue real, reemplazar con contenido revisado por un hablante nativo y un profesional clínico.",
+  "body": [
+    "El dolor de pecho tiene muchas causas posibles, desde una distensión muscular hasta afecciones graves del corazón o los pulmones. Debido a que algunas causas ponen en riesgo la vida, el dolor de pecho siempre se toma en serio en un entorno médico, incluso cuando después resulta ser algo menor.",
+    "El dolor acompañado de falta de aire, sudoración, náuseas o dolor que se extiende al brazo, la mandíbula o la espalda puede ser señal de un infarto. Esta combinación debe tratarse como una emergencia médica sin importar la edad o el estado físico de la persona, ya que los infartos no siempre se presentan con los síntomas 'clásicos' de los libros de texto, especialmente en mujeres y adultos mayores.",
+    "El dolor de pecho que es agudo, que empeora al respirar o moverse, y que no viene acompañado de otras señales cardíacas de alarma, se relaciona más comúnmente con una distensión musculoesquelética, reflujo ácido o ansiedad — pero esto igualmente debe confirmarlo un médico en lugar de asumirlo, sobre todo si es una sensación nueva o desconocida."
+  ]
+}
