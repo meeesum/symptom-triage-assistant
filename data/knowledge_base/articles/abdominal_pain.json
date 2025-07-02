@@ -1,0 +1,11 @@
+{
+  "id": "abdominal_pain",
+  "title": "Abdominal Pain: General Information",
+  "tags": ["severe_abdominal_pain", "severe_abdominal_pain_general", "pregnancy_severe_bleeding_or_pain"],
+  "source_note": "PLACEHOLDER CONTENT — authored for prototype purposes. Replace with reviewed clinical source content before real deployment.",
+  "body": [
+    "Abdominal pain has a wide range of causes, from minor digestive upset to conditions that require urgent surgical care, such as appendicitis, a bowel obstruction, or a ruptured organ.",
+    "Pain that is severe, sudden in onset, or accompanied by fever, vomiting, an inability to pass stool or gas, or a rigid/tender abdomen should be evaluated the same day rather than waiting to see if it resolves on its own.",
+    "During pregnancy, severe abdominal pain combined with vaginal bleeding needs to be evaluated immediately, since it can be a sign of a serious complication requiring urgent care regardless of how far along the pregnancy is."
+  ]
+}
