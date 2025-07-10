@@ -1,0 +1,11 @@
+{
+  "id": "chest_pain",
+  "title": "Chest Pain: General Information",
+  "tags": ["chest_pain", "cardiac_event_pattern", "chest_pain_isolated"],
+  "source_note": "PLACEHOLDER CONTENT — authored for prototype purposes. Before any real deployment, replace with reviewed excerpts from a licensed/verified source (e.g. MedlinePlus, CDC, or a clinical partner) and store the actual citation here.",
+  "body": [
+    "Chest pain has many possible causes, ranging from muscle strain to serious heart or lung conditions. Because some causes are life-threatening, chest pain is always taken seriously in a medical setting, even when it later turns out to be minor.",
+    "Pain that comes with shortness of breath, sweating, nausea, or pain spreading to the arm, jaw, or back can be a sign of a heart attack. This combination should be treated as a medical emergency regardless of the person's age or fitness level, since heart attacks do not always present with 'classic' textbook symptoms, especially in women and older adults.",
+    "Chest pain that is sharp, worsens with breathing or movement, and is not accompanied by other cardiac warning signs is more commonly linked to musculoskeletal strain, acid reflux, or anxiety — but this should still be confirmed by a clinician rather than assumed, particularly if it is a new or unfamiliar sensation."
+  ]
+}
