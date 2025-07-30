@@ -1,0 +1,12 @@
+{
+  "id": "fever_general_es",
+  "title": "Fiebre: Información General para Adultos y Niños",
+  "tags": ["fever", "high_fever_adult", "infant_high_fever"],
+  "language": "es",
+  "source_note": "CONTENIDO DE MARCADOR DE POSICIÓN — traducción no revisada clínicamente del artículo en inglés 'fever_general'. Reemplazar con contenido clínico revisado antes de cualquier despliegue real.",
+  "body": [
+    "La fiebre es la respuesta natural del cuerpo a una infección o enfermedad y no es en sí misma una enfermedad. En la mayoría de los adultos y niños mayores sanos, una fiebre sola — sin otros síntomas graves — a menudo puede vigilarse en casa con descanso y líquidos.",
+    "La fiebre se vuelve más preocupante cuando es muy alta, dura más de un par de días, o viene acompañada de síntomas como rigidez en el cuello, dolor de cabeza intenso, confusión, dificultad para respirar, o una erupción que no desaparece al presionarla.",
+    "En bebés menores de 3 meses, la fiebre se trata de manera diferente que en niños mayores o adultos: debido a que tanto el sistema inmunológico como la capacidad de mostrar otros síntomas de un bebé pequeño son limitados, cualquier fiebre en este grupo de edad se considera potencialmente grave y amerita evaluación médica pronta, incluso si el bebé por lo demás parece estar actuando con normalidad."
+  ]
+}
