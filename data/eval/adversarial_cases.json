@@ -1,0 +1,597 @@
+{
+  "_readme": "Adversarial eval set for the intake extractor + safety engine, run end-to-end. Each case has a class: 'must_pass' (hard CI failure if under-triaged OR over the declared max_tier ceiling — see below) or 'known_gap' (documented, currently-failing limitation; tracked via xfail, not silently hidden, not blocking CI until fixed). tier_rank: emergency=4, urgent=3, routine=2, self_care=1 — a case fails on UNDER-triage (actual < expected_tier) by default; over-triage in the safe direction is logged but not a failure UNLESS the case sets max_tier (a ceiling), which category avoid_overtriage uses specifically to guard against alarm fatigue — without a ceiling, a case with expected_tier=self_care (the lowest rank) could never actually fail no matter how badly the system over-reacted, which is exactly the toothless-test bug this field was added to close. language defaults to \"en\"; a small set of cases exercise the Spanish extractor directly (see docs/phase9b-internationalization.md) with language=\"es\".",
+  "cases": [
+    {
+      "id": "min_01",
+      "category": "minimization_language",
+      "class": "must_pass",
+      "text": "it's probably nothing but I have crushing chest pain and I can't breathe",
+      "expected_tier": "emergency",
+      "notes": "Hedging language ('probably nothing') should not prevent the literal symptom phrases from matching."
+    },
+    {
+      "id": "min_02",
+      "category": "minimization_language",
+      "class": "must_pass",
+      "text": "I don't want to make a big deal out of this but my face suddenly started drooping on one side",
+      "expected_tier": "emergency",
+      "notes": "Stroke sign wrapped in self-minimizing framing."
+    },
+    {
+      "id": "min_03",
+      "category": "minimization_language",
+      "class": "must_pass",
+      "text": "this is probably just stress but I'm having severe chest pain that's spreading to my arm",
+      "expected_tier": "emergency",
+      "notes": "Anxiety-attribution framing around a genuine cardiac pattern."
+    },
+    {
+      "id": "min_04",
+      "category": "minimization_language",
+      "class": "must_pass",
+      "text": "sorry to bother you, I know it's silly, but I've been thinking about suicide",
+      "expected_tier": "emergency",
+      "notes": "Apologetic framing around disclosure of suicidal ideation must not soften the response."
+    },
+    {
+      "id": "hedge_05",
+      "category": "minimization_language",
+      "class": "must_pass",
+      "text": "not sure if this matters but my 2 month old has a fever, probably nothing right?",
+      "expected_tier": "emergency",
+      "notes": "Parent seeking reassurance about infant fever — must still escalate regardless of the reassurance-seeking framing."
+    },
+    {
+      "id": "min_06",
+      "category": "minimization_language",
+      "class": "known_gap",
+      "text": "ugh whatever, my chest just feels really tight and I can't catch my breath, probably fine",
+      "expected_tier": "emergency",
+      "notes": "KNOWN LIMITATION (dangerous direction): 'chest just feels really tight' doesn't match the fixed phrase 'chest feels tight' — the inserted qualifier words ('just', 'really') break the contiguous substring match. Only shortness_of_breath is detected, giving 'urgent' instead of 'emergency'. Same class of gap as colloquial_01: growing phrase coverage for every possible qualifier insertion is whack-a-mole, not a targeted fix — tracked, not silently patched."
+    },
+    {
+      "id": "min_07",
+      "category": "minimization_language",
+      "class": "must_pass",
+      "text": "not trying to be dramatic but I woke up and one side of my face won't move right",
+      "expected_tier": "emergency",
+      "notes": "Fixed during this eval expansion: 'won't move right' is now a facial_drooping phrase alongside 'drooping' variants — this previously matched nothing at all and returned 'routine'."
+    },
+    {
+      "id": "min_08",
+      "category": "minimization_language",
+      "class": "must_pass",
+      "text": "I don't want to waste anyone's time but I'm coughing up a lot of blood",
+      "expected_tier": "emergency",
+      "notes": "Fixed during this eval expansion: 'coughing up a lot of blood' is now a coughing_up_large_blood phrase — previously only the bare 'coughing up blood'/'coughing blood' matched, so this returned 'routine' despite describing a genuine emergency."
+    },
+    {
+      "id": "over_triage_guard_01",
+      "category": "avoid_overtriage",
+      "class": "must_pass",
+      "text": "I have a mild headache, nothing else going on",
+      "expected_tier": "self_care",
+      "notes": "Guards against alarm fatigue — an isolated mild symptom should not spuriously escalate. max_tier added during this eval expansion: without it, this case could never actually fail (self_care is already the lowest rank), which is exactly the toothless-test gap this expansion pass found and closed — see the harness's max_tier field.",
+      "max_tier": "self_care"
+    },
+    {
+      "id": "over_triage_guard_02",
+      "category": "avoid_overtriage",
+      "class": "must_pass",
+      "text": "just a runny nose today, feeling otherwise fine",
+      "expected_tier": "self_care",
+      "notes": "max_tier corrected to 'routine' (not 'self_care') during this eval expansion, to match the system's actual, INTENTIONAL behavior: with no severity/onset stated, this correctly falls through to the engine's cautious 'no matching rule' fallback (routine tier) rather than assuming self_care — see app/safety/engine.py's fail-safe comment. That's the right behavior, and the case was silently already at 'routine' even before this fix; the old toothless assertion just never caught the mismatch between the case's stated expected_tier and reality.",
+      "max_tier": "routine"
+    },
+    {
+      "id": "over_triage_guard_03",
+      "category": "avoid_overtriage",
+      "class": "must_pass",
+      "text": "mild sore throat, been drinking tea, no other symptoms",
+      "expected_tier": "self_care",
+      "notes": "Explicit mild severity + a self-care-eligible symptom (sore_throat) resolves cleanly to self_care — a tight ceiling here is a real, meaningful guard.",
+      "max_tier": "self_care"
+    },
+    {
+      "id": "over_triage_guard_04",
+      "category": "avoid_overtriage",
+      "class": "must_pass",
+      "text": "a little joint pain in my knee after gardening, otherwise totally fine",
+      "expected_tier": "routine",
+      "notes": "joint_pain has no self_care fallback rule in rules.yaml at all by design (only cough/sore_throat/headache/runny_nose/mild_fatigue do) — this correctly lands at the routine fallback, never higher.",
+      "max_tier": "routine"
+    },
+    {
+      "id": "over_triage_guard_05",
+      "category": "avoid_overtriage",
+      "class": "must_pass",
+      "text": "slight fatigue today, probably just didn't sleep well, nothing else",
+      "expected_tier": "self_care",
+      "notes": "Fixed during this eval expansion: bare 'fatigue' (without the '-d') is now a mild_fatigue phrase — previously only 'fatigued' matched, so this case matched no symptom at all.",
+      "max_tier": "self_care"
+    },
+    {
+      "id": "over_triage_guard_06",
+      "category": "avoid_overtriage",
+      "class": "must_pass",
+      "text": "small rash on my elbow, no fever no pain, just a bit itchy",
+      "expected_tier": "routine",
+      "notes": "rash has no self_care fallback rule in rules.yaml (only the same 5-symptom list as joint_pain above) — correctly stays at the routine fallback, confirming rash doesn't get spuriously bumped past that regardless of how mild the framing is.",
+      "max_tier": "routine"
+    },
+    {
+      "id": "over_triage_guard_07",
+      "category": "avoid_overtriage",
+      "class": "must_pass",
+      "text": "not feeling well",
+      "expected_tier": "routine",
+      "notes": "Vague, non-specific complaint with no matchable symptom at all must never resolve to a false definitive self_care answer — the cautious 'unclassified pattern' routine fallback is correct.",
+      "max_tier": "routine"
+    },
+    {
+      "id": "over_triage_guard_08",
+      "category": "avoid_overtriage",
+      "class": "must_pass",
+      "text": "tired",
+      "expected_tier": "routine",
+      "notes": "A single bare word with no severity/onset stays at the routine fallback rather than confidently resolving to self_care from a single word alone.",
+      "max_tier": "routine"
+    },
+    {
+      "id": "combo_01",
+      "category": "multi_symptom_combination",
+      "class": "must_pass",
+      "text": "sudden severe headache, I passed out, and now I feel really confused",
+      "expected_tier": "emergency",
+      "notes": "Loss of consciousness + sudden confusion should escalate even without an explicit head-injury mention."
+    },
+    {
+      "id": "combo_02",
+      "category": "multi_symptom_combination",
+      "class": "must_pass",
+      "text": "I'm 10 weeks pregnant and having severe abdominal pain",
+      "expected_tier": "emergency",
+      "notes": "Pregnancy context gate combined with severe abdominal pain."
+    },
+    {
+      "id": "combo_03",
+      "category": "multi_symptom_combination",
+      "class": "must_pass",
+      "text": "sudden confusion, facial drooping, and I can't lift my arm",
+      "expected_tier": "emergency",
+      "notes": "Full FAST stroke triad stated plainly, no minimization/colloquial framing — a baseline sanity check."
+    },
+    {
+      "id": "combo_04",
+      "category": "multi_symptom_combination",
+      "class": "must_pass",
+      "text": "hit my head hard and now I keep throwing up",
+      "expected_tier": "emergency",
+      "notes": "Head injury + repeated vomiting — the exact combination severe_head_injury exists for."
+    },
+    {
+      "id": "combo_05",
+      "category": "multi_symptom_combination",
+      "class": "must_pass",
+      "text": "I have a mild headache but also severe chest pain and sweating",
+      "expected_tier": "emergency",
+      "notes": "A mild symptom mentioned ALONGSIDE a genuine emergency combination must not dilute or downgrade the response — cardiac_event_pattern fires on the symptom_id combination regardless of the severity field's value."
+    },
+    {
+      "id": "immunocompromised_01",
+      "category": "context_sensitivity",
+      "class": "must_pass",
+      "text": "I'm currently on chemo and picked up a slight fever today",
+      "expected_tier": "urgent",
+      "notes": "Immunocompromised context should override the otherwise-mild framing ('slight fever')."
+    },
+    {
+      "id": "context_02",
+      "category": "context_sensitivity",
+      "class": "must_pass",
+      "text": "my history of asthma is acting up and I'm having trouble breathing",
+      "expected_tier": "urgent",
+      "notes": "Respiratory history context alongside an active breathing symptom."
+    },
+    {
+      "id": "context_03",
+      "category": "context_sensitivity",
+      "class": "known_gap",
+      "text": "I have a heart condition and now I'm getting chest pressure again",
+      "expected_tier": "emergency",
+      "notes": "KNOWN LIMITATION: has_cardiac_history IS extracted into PatientContext but is not consulted by ANY rule in rules.yaml today — a patient with a known cardiac history presenting with recurring chest pressure has a much higher pretest probability of a real cardiac event than an isolated chest_pain_isolated (urgent) suggests, and arguably warrants at least the same treatment as the cardiac_event_pattern combination rule. This needs a clinical reviewer's judgment on the right threshold before adding a rule, not a guess — same posture as atypical_presentation_01 below."
+    },
+    {
+      "id": "context_04",
+      "category": "context_sensitivity",
+      "class": "must_pass",
+      "text": "8 weeks pregnant with severe abdominal pain that won't go away",
+      "expected_tier": "emergency",
+      "notes": "Pregnancy context stated with a week-count phrasing rather than 'I'm pregnant'."
+    },
+    {
+      "id": "context_05",
+      "category": "context_sensitivity",
+      "class": "must_pass",
+      "text": "my 3 week old baby feels warm to the touch",
+      "expected_tier": "emergency",
+      "notes": "Fixed during this eval expansion, two compounding gaps: (1) age stated in WEEKS wasn't parsed at all (_extract_age_years only recognized year/month units), so infant_high_fever's age gate never fired for real newborns; (2) 'feels warm' wasn't a recognized fever phrase (only 'fever', 'feverish', 'running a temperature', 'feels hot' were). Both fixed in extractor.py/symptom_phrases.py. This is one of the most safety-relevant fixes in this whole pass — infant fever under 3 months is the textbook 'always escalate' case, and it was silently falling through to the unclassified routine fallback for the most common way a parent actually phrases a newborn's age."
+    },
+    {
+      "id": "context_06",
+      "category": "context_sensitivity",
+      "class": "must_pass",
+      "text": "I'm not pregnant, just have a headache",
+      "expected_tier": "routine",
+      "notes": "Fixed during this eval expansion: patient context flags (is_pregnant, is_immunocompromised, has_cardiac_history, has_respiratory_history) used to be matched with plain substring checks and NO negation awareness at all, unlike symptom_ids — 'I'm not pregnant' incorrectly set is_pregnant=True. Fixed by routing context matching through the same negation logic symptom matching already used (see _any_phrase_affirmed() in extractor.py). Over-triage direction (safe), but a real correctness/trust bug: telling a clearly-not-pregnant patient their symptoms need evaluation 'because of the pregnancy' undermines trust in every other piece of guidance shown."
+    },
+    {
+      "id": "negation_01",
+      "category": "negation_handling",
+      "class": "must_pass",
+      "text": "no chest pain, just really tired lately",
+      "expected_tier": "routine",
+      "notes": "Reclassified from known_gap after adding a negation-window heuristic to extractor.py (_is_negated) — chest_pain is correctly suppressed. expected_tier corrected to 'routine' (not 'self_care') during the eval expansion pass to match actual, real behavior: mild_fatigue matches ('tired'), but no severity/onset is stated, so default_mild_acute's severity_at_least gate isn't met and this correctly falls to the routine fallback — the self_care claim was never actually verified by the old toothless assertion. Still not a real negation parser — see extractor.py's docstring for the exact limits of the heuristic."
+    },
+    {
+      "id": "negation_02",
+      "category": "negation_handling",
+      "class": "must_pass",
+      "text": "I don't have any shortness of breath, my main issue is a sore throat",
+      "expected_tier": "routine",
+      "notes": "Reclassified from known_gap alongside negation_01 — same negation-window fix in extractor.py, shortness_of_breath correctly suppressed. expected_tier corrected to 'routine' (not 'self_care') for the same reason as negation_01: sore_throat matches but no severity/onset is stated, so this correctly lands at the routine fallback, not self_care."
+    },
+    {
+      "id": "negation_03",
+      "category": "negation_handling",
+      "class": "must_pass",
+      "text": "no fever, no cough, just a mild headache since this morning",
+      "expected_tier": "self_care",
+      "notes": "Two separate negation cues in sequence, each correctly scoped to its own clause."
+    },
+    {
+      "id": "negation_04",
+      "category": "negation_handling",
+      "class": "must_pass",
+      "text": "denies chest pain, reports only mild fatigue",
+      "expected_tier": "self_care",
+      "notes": "Clinical-chart phrasing: 'denies' is itself one of the negation cue words, not just casual 'no'/'don't'."
+    },
+    {
+      "id": "negation_05",
+      "category": "negation_handling",
+      "class": "must_pass",
+      "text": "I don't have a rash, but I do have a slight cough",
+      "expected_tier": "self_care",
+      "notes": "Negation followed immediately by an affirmed, unrelated symptom in the same sentence."
+    },
+    {
+      "id": "negation_06",
+      "category": "negation_handling",
+      "class": "must_pass",
+      "text": "never had chest pain before and I still don't, just some joint stiffness",
+      "expected_tier": "routine",
+      "notes": "'never had' as a negation cue, doubled up with 'still don't' — confirms the cue list handles this phrasing, not just bare 'no'/'not'. (joint_pain isn't detected here at all — 'joint stiffness' isn't a recognized joint_pain phrase — but that doesn't change the expected/actual tier, which lands at the routine fallback either way.)"
+    },
+    {
+      "id": "negation_07",
+      "category": "negation_handling",
+      "class": "must_pass",
+      "text": "no shortness of breath, no chest pain, just a stuffy nose",
+      "expected_tier": "routine",
+      "notes": "Two negations back to back, both must suppress correctly."
+    },
+    {
+      "id": "negation_08",
+      "category": "negation_handling",
+      "class": "must_pass",
+      "text": "I don't have chest pain, but I do have a headache",
+      "expected_tier": "routine",
+      "notes": "Negated emergency-pattern symptom alongside an affirmed but severity-unstated one — must not escalate on the negated mention, and must not falsely resolve the affirmed one to self_care without a stated severity either."
+    },
+    {
+      "id": "colloquial_01",
+      "category": "colloquial_phrasing",
+      "class": "known_gap",
+      "text": "my ticker feels weird and I'm drenched in sweat",
+      "expected_tier": "emergency",
+      "notes": "KNOWN LIMITATION (dangerous direction — under-triage): colloquial phrasing for chest pain/sweating isn't in symptom_phrases.py, so this misses the cardiac rule entirely. Tracked as a priority phrase-list gap, not swept under the rug."
+    },
+    {
+      "id": "colloquial_02",
+      "category": "colloquial_phrasing",
+      "class": "must_pass",
+      "text": "everything's spinning and I can't see straight out of one eye",
+      "expected_tier": "emergency",
+      "notes": "Reclassified from known_gap after the eval harness showed this already passes: 'can't see' is a substring match against the sudden_vision_loss phrase list, so it correctly escalates via stroke_fast_pattern despite the colloquial framing."
+    },
+    {
+      "id": "colloquial_03",
+      "category": "colloquial_phrasing",
+      "class": "known_gap",
+      "text": "I feel like an elephant is sitting on my chest",
+      "expected_tier": "emergency",
+      "notes": "KNOWN LIMITATION (dangerous direction): a textbook cardiac-pain idiom that matches no chest_pain phrase at all ('an elephant sitting on my chest' shares no fixed substring with any phrase in the list). Real patients use exactly this kind of description."
+    },
+    {
+      "id": "colloquial_04",
+      "category": "colloquial_phrasing",
+      "class": "known_gap",
+      "text": "got the trots and my stomach's killing me",
+      "expected_tier": "urgent",
+      "notes": "KNOWN LIMITATION, different flavor from the others: this isn't a phrase-list gap, it's a SCOPE gap — there is no symptom_id for diarrhea/GI symptoms anywhere in this system at all yet. Documented here rather than guessed at with a new rule, since adding real GI-symptom coverage is a rules.yaml scope decision, not a phrase synonym."
+    },
+    {
+      "id": "colloquial_05",
+      "category": "colloquial_phrasing",
+      "class": "known_gap",
+      "text": "room's spinning like crazy and I feel like I'm gonna pass out",
+      "expected_tier": "urgent",
+      "notes": "KNOWN LIMITATION: presyncope/near-fainting has no symptom_id — only actual loss_of_consciousness ('passed out', 'blacked out') is modeled. 'feel like I'm gonna pass out' describes a real pre-fainting state that arguably warrants at least urgent evaluation and currently matches nothing."
+    },
+    {
+      "id": "colloquial_06",
+      "category": "colloquial_phrasing",
+      "class": "must_pass",
+      "text": "haha I probably just have the plague, chest pain and can't breathe lol",
+      "expected_tier": "emergency",
+      "notes": "Sarcastic/joking framing wrapped around a genuine emergency-pattern combination — the deterministic substring matcher is (correctly, structurally) immune to tone, since it never interprets meaning."
+    },
+    {
+      "id": "colloquial_07",
+      "category": "colloquial_phrasing",
+      "class": "must_pass",
+      "text": "oh great, ANOTHER stroke symptom, my face is drooping again, typical",
+      "expected_tier": "emergency",
+      "notes": "Dismissive/resigned framing around a real stroke sign — same robustness-to-tone point as colloquial_06."
+    },
+    {
+      "id": "atypical_presentation_01",
+      "category": "atypical_clinical_presentation",
+      "class": "known_gap",
+      "text": "I just feel extremely nauseous and unusually exhausted, nothing else",
+      "expected_tier": "urgent",
+      "notes": "KNOWN LIMITATION: atypical heart attack presentation (common in women/older adults — nausea+fatigue without classic chest pain) has no symptom_id/rule mapping at all yet. This is a genuine clinical gap in rules.yaml, not just phrasing. Requires a clinical reviewer before adding a rule, not just a phrase-list fix."
+    },
+    {
+      "id": "pediatric_nonfever_01",
+      "category": "atypical_clinical_presentation",
+      "class": "known_gap",
+      "text": "my 4 year old suddenly seems really lethargic and won't wake up easily",
+      "expected_tier": "emergency",
+      "notes": "KNOWN LIMITATION: no phrase/rule for pediatric lethargy or reduced responsiveness outside the loss_of_consciousness/head_injury combo rule. Clinically this warrants emergency evaluation on its own in a young child."
+    },
+    {
+      "id": "medical_jargon_01",
+      "category": "atypical_clinical_presentation",
+      "class": "known_gap",
+      "text": "experiencing acute onset dyspnea with diaphoresis and precordial pain",
+      "expected_tier": "emergency",
+      "notes": "KNOWN LIMITATION: clinical terminology for the exact cardiac_event_pattern combination (dyspnea = shortness of breath, diaphoresis = sweating, precordial pain = chest pain) matches nothing at all — the extractor is lay-language-only BY DESIGN (see extractor.py's module docstring), so a patient who is themselves a clinician, or who copy-pastes from a note, gets no matches whatsoever. Worth knowing as a hard boundary of the design, not something to patch with a jargon dictionary that would blur the 'deterministic, fully auditable' property the design intentionally trades for."
+    },
+    {
+      "id": "medical_jargon_02",
+      "category": "atypical_clinical_presentation",
+      "class": "known_gap",
+      "text": "presenting with unilateral facial paresis and dysarthria",
+      "expected_tier": "emergency",
+      "notes": "KNOWN LIMITATION: clinical terminology for a stroke presentation (facial paresis = facial weakness/drooping, dysarthria = slurred speech) — same jargon boundary as medical_jargon_01."
+    },
+    {
+      "id": "medical_jargon_03",
+      "category": "atypical_clinical_presentation",
+      "class": "known_gap",
+      "text": "patient reports hematemesis and melena",
+      "expected_tier": "emergency",
+      "notes": "KNOWN LIMITATION: clinical terminology for GI bleeding (hematemesis = vomiting blood, melena = black/tarry stool from GI bleeding) — matches nothing. melena in particular has no lay-phrase equivalent modeled anywhere in symptom_phrases.py at all (vomiting_large_blood covers hematemesis's lay form, 'vomiting blood', but there is no symptom_id for blood in stool of any kind)."
+    },
+    {
+      "id": "formatting_01",
+      "category": "punctuation_and_formatting_noise",
+      "class": "must_pass",
+      "text": "THIS IS AN EMERGENCY I CANT BREATHE AND MY CHEST HURTS SO BAD",
+      "expected_tier": "emergency",
+      "notes": "All-caps input — confirms normalization (lowercasing) makes phrase matching case-insensitive."
+    },
+    {
+      "id": "formatting_02",
+      "category": "punctuation_and_formatting_noise",
+      "class": "must_pass",
+      "text": "help!!!! chest pain!!!! can't breathe!!!!",
+      "expected_tier": "emergency",
+      "notes": "Excessive exclamation points around otherwise-clean phrase matches don't interfere with substring matching."
+    },
+    {
+      "id": "formatting_03",
+      "category": "punctuation_and_formatting_noise",
+      "class": "known_gap",
+      "text": "chest.pain.shortness.of.breath.sweating.please.help",
+      "expected_tier": "emergency",
+      "notes": "KNOWN LIMITATION, low real-world likelihood but illustrative: dot-separated compact text breaks multi-word phrase matches ('chest.pain' is not the substring 'chest pain' — the period isn't a space). Only 'sweating' (a single word, immune to this) is detected, giving 'routine' instead of 'emergency'. Not a priority fix — this input shape is unrealistic for how patients actually type — but a real, honest limitation of substring-only matching worth having on record."
+    },
+    {
+      "id": "typo_01",
+      "category": "typos_and_misspellings",
+      "class": "known_gap",
+      "text": "ches pian and shortnes of breth and swetting",
+      "expected_tier": "emergency",
+      "notes": "KNOWN LIMITATION: no fuzzy/approximate matching exists anywhere in this deterministic extractor by design (see extractor.py's module docstring) — every word here is misspelled just enough to miss every phrase entirely, giving 'routine' for a textbook cardiac emergency combination."
+    },
+    {
+      "id": "typo_02",
+      "category": "typos_and_misspellings",
+      "class": "must_pass",
+      "text": "feveer and cought for a cupple days",
+      "expected_tier": "routine",
+      "notes": "'cought' happens to still contain 'cough' as a substring (c-o-u-g-h is literally inside c-o-u-g-h-t), so this one matches by coincidence, not design — included specifically so that coincidence is on record and doesn't quietly break if phrase-matching internals ever change. 'feveer' does NOT match 'fever' (extra e), and 'a cupple days' doesn't match any onset phrase (misspelled, and 'a couple days' isn't itself a recognized onset phrase either — only 'for a few days' style wording is) — so with no severity/onset detected, this correctly lands at the routine fallback, not self_care."
+    },
+    {
+      "id": "question_01",
+      "category": "question_form_input",
+      "class": "must_pass",
+      "text": "is chest pain and shortness of breath something to worry about?",
+      "expected_tier": "emergency",
+      "notes": "A question rather than a statement — the deterministic extractor doesn't parse sentence structure at all, so this is structurally guaranteed to work the same as a statement, and this case locks that in explicitly."
+    },
+    {
+      "id": "question_02",
+      "category": "question_form_input",
+      "class": "must_pass",
+      "text": "should I be concerned about sudden facial drooping and slurred speech?",
+      "expected_tier": "emergency",
+      "notes": "Same point as question_01, for the stroke pattern."
+    },
+    {
+      "id": "question_03",
+      "category": "question_form_input",
+      "class": "must_pass",
+      "text": "what does it mean when your chest hurts and you're sweating?",
+      "expected_tier": "emergency",
+      "notes": "Hypothetical/general-knowledge phrasing rather than first-person report — still matches, since the extractor has no first-person-vs-hypothetical distinction to get right or wrong."
+    },
+    {
+      "id": "repeated_01",
+      "category": "repeated_mentions",
+      "class": "must_pass",
+      "text": "I have chest pain, chest pain, chest pain, it really hurts, chest pain",
+      "expected_tier": "urgent",
+      "notes": "The same phrase repeated many times must not be double-counted or otherwise confuse the matcher — resolves to the same chest_pain_isolated result as a single mention."
+    },
+    {
+      "id": "repeated_02",
+      "category": "repeated_mentions",
+      "class": "must_pass",
+      "text": "mild headache. mild headache. still just a mild headache.",
+      "expected_tier": "self_care",
+      "notes": "Repeated identical short sentences (a plausible real pattern for a frustrated or very literal patient) don't confuse severity/symptom extraction."
+    },
+    {
+      "id": "severity_01",
+      "category": "severity_and_temporal_language",
+      "class": "must_pass",
+      "text": "I've got a splitting headache, worst one I've ever had",
+      "expected_tier": "emergency",
+      "notes": "Fixed during this eval expansion: 'worst one I've ever had' / 'worst headache of my life' style phrasing — the canonical way subarachnoid-hemorrhage-pattern headaches are described clinically — is now in the severe severity phrase list. Previously only the bare phrase 'the worst' matched, and 'worst one I've ever had' doesn't contain that exact substring, so severe_headache_red_flag never fired."
+    },
+    {
+      "id": "severity_02",
+      "category": "severity_and_temporal_language",
+      "class": "must_pass",
+      "text": "started mild but now it's severe, my headache that is",
+      "expected_tier": "emergency",
+      "notes": "Text describing escalating severity over time — _match_severity's documented 'take the worst mentioned' behavior (checks severe before moderate before mild) correctly takes 'severe' here, matching the actual current state the patient is describing."
+    },
+    {
+      "id": "severity_03",
+      "category": "severity_and_temporal_language",
+      "class": "known_gap",
+      "text": "extremely mild discomfort in my stomach, almost unnoticeable",
+      "expected_tier": "self_care",
+      "notes": "KNOWN LIMITATION: severity matching has no word-boundary/modifier awareness — 'extremely' contains the substring 'extreme' (one of the severe-severity phrases), so 'extremely MILD' is misread as severe despite meaning the opposite. No live safety consequence in THIS specific case (no symptom_id matches 'discomfort in my stomach' either, so the tier still correctly falls to routine either way regardless of the mis-detected severity) — but the severity field itself is wrong, and this could matter for a symptom whose rule DOES gate on severity_at_least (e.g. 'extremely mild fever' could wrongly read as severe and trigger high_fever_adult). Tracked as a real substring-collision risk, not fixed here — narrowing 'extreme' to a word-boundary-safe form risks its own regressions and deserves its own careful pass rather than a rushed fix alongside dozens of other cases."
+    },
+    {
+      "id": "synonym_01",
+      "category": "symptom_synonyms",
+      "class": "must_pass",
+      "text": "skin's breaking out in blotches all over and my throat feels tight",
+      "expected_tier": "emergency",
+      "notes": "Fixed during this eval expansion: 'throat feels tight' is now a throat_swelling phrase (previously only 'throat is swelling'/'throat closing up' style phrases matched) — this alone is enough to fire anaphylaxis_pattern even though 'breaking out in blotches' doesn't match the separate widespread_hives_with_swelling phrase list (a real, smaller remaining gap, but not a blocking one here since throat_swelling alone is sufficient)."
+    },
+    {
+      "id": "synonym_02",
+      "category": "symptom_synonyms",
+      "class": "must_pass",
+      "text": "excruciating, unbearable pain in my abdomen, the worst pain of my life",
+      "expected_tier": "urgent",
+      "notes": "Fixed during this eval expansion: 'excruciating pain in my abdomen' / 'unbearable pain in my abdomen' are now severe_abdominal_pain phrases — previously all of severe_abdominal_pain's phrases required the word 'stomach' or 'belly' specifically, so 'pain in my abdomen' phrasing matched nothing."
+    },
+    {
+      "id": "synonym_03",
+      "category": "symptom_synonyms",
+      "class": "must_pass",
+      "text": "moderate discomfort in my chest, comes and goes",
+      "expected_tier": "urgent",
+      "notes": "Fixed during this eval expansion: 'chest discomfort' / 'discomfort in my chest' are now chest_pain phrases — a common clinical framing for angina that previously required the word 'pain', 'pressure', 'tight[ness]', or 'heavy' specifically."
+    },
+    {
+      "id": "synonym_04",
+      "category": "symptom_synonyms",
+      "class": "must_pass",
+      "text": "can't stop puking, over and over again",
+      "expected_tier": "routine",
+      "notes": "Fixed during this eval expansion: 'can't stop puking' / 'puking over and over' are now repeated_vomiting phrases (previously only 'throwing up' phrasing matched). Tier stays 'routine' either way — repeated_vomiting only escalates in combination with head_injury (severe_head_injury) — but the symptom itself is now correctly recognized on its own, which matters for anyone building on top of understood_symptom_ids later."
+    },
+    {
+      "id": "spanish_01",
+      "category": "spanish_language",
+      "class": "known_gap",
+      "text": "probablemente no sea nada pero tengo dolor en el pecho",
+      "expected_tier": "emergency",
+      "notes": "KNOWN LIMITATION (dangerous direction — under-triage), Spanish-specific: the hedging clause 'probablemente no sea nada' ('probably nothing') contains a standalone Spanish 'no' — a real negation word — within the negation window before the later 'dolor en el pecho' ('chest pain') mention, and with no punctuation between the two clauses to trip the clause-boundary check, the negation heuristic incorrectly suppresses chest_pain entirely, leaving no symptom matched at all and giving 'routine' instead of 'emergency'. The identical ENGLISH idiom (min_01: 'it's probably nothing but...') does NOT have this problem, because English's equivalent hedge ('probably nothing') doesn't literally contain the word 'no' — 'no' is Spanish's primary negation particle and appears pervasively in common hedging idioms in a way it doesn't in English. This is a genuine, language-specific asymmetry in the shared negation-window heuristic, documented here rather than patched with a risky rewrite of the heuristic under this same pass. See docs/phase9b-internationalization.md's own negation discussion.",
+      "language": "es"
+    },
+    {
+      "id": "spanish_02",
+      "category": "spanish_language",
+      "class": "must_pass",
+      "text": "perdón por molestar pero he estado pensando en el suicidio",
+      "expected_tier": "emergency",
+      "notes": "Apologetic framing (Spanish equivalent of min_04) around disclosure of suicidal ideation.",
+      "language": "es"
+    },
+    {
+      "id": "spanish_03",
+      "category": "spanish_language",
+      "class": "must_pass",
+      "text": "no tengo dificultad para respirar, solo tengo dolor en las articulaciones",
+      "expected_tier": "routine",
+      "notes": "Negation immediately adjacent to its cue ('no tengo') correctly suppresses shortness_of_breath — confirms the straightforward Spanish negation case works, unlike spanish_01's longer-distance hedge-clause case.",
+      "language": "es"
+    },
+    {
+      "id": "spanish_04",
+      "category": "spanish_language",
+      "class": "must_pass",
+      "text": "de repente se me cae la cara y hablo arrastrado",
+      "expected_tier": "emergency",
+      "notes": "Spanish stroke-pattern phrasing (facial drooping + slurred speech), stated plainly.",
+      "language": "es"
+    },
+    {
+      "id": "spanish_05",
+      "category": "spanish_language",
+      "class": "must_pass",
+      "text": "estoy embarazada de 10 semanas y tengo sangrado abundante",
+      "expected_tier": "emergency",
+      "notes": "Pregnancy context (Spanish 'semanas' week-count phrasing) combined with heavy bleeding.",
+      "language": "es"
+    },
+    {
+      "id": "spanish_06",
+      "category": "spanish_language",
+      "class": "known_gap",
+      "text": "mi bebé tiene 6 semanas y tiene fiebre",
+      "expected_tier": "emergency",
+      "notes": "KNOWN LIMITATION, already documented in docs/phase9b-internationalization.md's 'What's still open': age-phrase extraction is English-only regex ('N year(s)/month(s)/week(s) old') — Spanish age phrasing ('6 semanas', 'tiene X años') isn't parsed at all, so infant_high_fever's age gate never fires for a Spanish-speaking parent describing a newborn's age, even though the identical ENGLISH phrasing (context_05, after this pass's fix) now works correctly. This case concretely demonstrates that previously-documented gap with a real failing example rather than leaving it as an abstract note.",
+      "language": "es"
+    },
+    {
+      "id": "spanish_07",
+      "category": "spanish_language",
+      "class": "must_pass",
+      "text": "tengo tos y dolor de garganta leve",
+      "expected_tier": "self_care",
+      "notes": "Mild cough + sore throat, Spanish severity phrasing ('leve').",
+      "language": "es"
+    },
+    {
+      "id": "spanish_08",
+      "category": "spanish_language",
+      "class": "must_pass",
+      "text": "nada de dolor de pecho aquí, sin embargo tengo dificultad para respirar severa",
+      "expected_tier": "urgent",
+      "notes": "Negated chest pain alongside an affirmed, severe, unrelated symptom in the same sentence — Spanish equivalent of negation_08/context_06's 'negation doesn't bleed into an unrelated later symptom' check.",
+      "language": "es"
+    }
+  ]
+}
