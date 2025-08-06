@@ -1,0 +1,10 @@
+id: rash
+title: Rash: General Information
+tags: rash, persistent_mild_symptoms
+source_note: PLACEHOLDER CONTENT — authored for prototype purposes. Before any real deployment, replace with reviewed excerpts from a licensed/verified source (e.g. MedlinePlus, CDC, or a clinical partner) and store the actual citation here.
+
+Most rashes are mild and self-limited — caused by things like irritation, a mild allergic reaction, a common viral illness, or a skin condition like eczema — and improve on their own or with basic care such as avoiding the irritant and using an over-the-counter moisturizer or anti-itch cream.
+
+A rash accompanied by fever, spreading rapidly, blistering, involving the mouth or eyes, or looking like small bruises or pinpoint red-purple spots that don't fade when pressed can be a sign of a more serious underlying illness, including certain infections, and should be evaluated promptly. A rash that appears alongside facial or throat swelling or difficulty breathing is a sign of a severe allergic reaction and is a medical emergency in its own right, not just a skin issue.
+
+A rash that persists beyond a week or two without improvement, keeps recurring, or is not clearly explained by an obvious irritant is worth having evaluated by a primary care provider or dermatologist, since some rashes are early signs of conditions that are easier to manage when caught early.
