@@ -1,0 +1,32 @@
+fastapi==0.111.0
+uvicorn[standard]==0.30.1
+pydantic==2.7.4
+pyyaml==6.0.1
+sqlalchemy==2.0.31
+psycopg[binary]==3.3.4  # psycopg v3, not psycopg2 — see app/core/config.py's docstring for why
+alembic==1.13.2
+redis==5.0.8            # access-token blocklist + refresh-token tracking (app/services/*)
+rq==2.11.0              # high-risk alert job queue — app/services/alerting.py
+# Email/SMS notifications (app/services/notifications.py) use only the
+# Python standard library (smtplib, urllib) — deliberately no new
+# dependency for either channel; see that module's docstring for why.
+pyjwt==2.13.0
+email-validator==2.2.0
+Pillow==12.3.0          # symptom photo upload validation — app/services/symptom_photos.py
+python-multipart==0.0.20  # required by FastAPI to parse multipart/form-data uploads
+reportlab==4.4.10       # PDF report generation — app/services/reporting.py (pure Python, no system deps)
+
+# RAG / LLM (wired in app/rag)
+scikit-learn==1.5.0    # default TF-IDF retrieval — see app/rag/retriever.py docstring
+anthropic==0.28.1       # optional: only imported if ANTHROPIC_API_KEY is set
+fastembed==0.8.0        # dense embeddings (ONNX, no torch) — RETRIEVAL_BACKEND=dense only
+qdrant-client==1.19.0   # vector store — in-memory by default, real server via QDRANT_URL
+
+# testing
+pytest==8.2.2
+pytest-asyncio==0.23.7
+httpx==0.27.0
+fakeredis==2.37.0   # in-memory Redis substitute — see app/core/redis_client.py
+
+# load testing — scripts/loadtest/*.py, run manually/ad hoc, not part of `pytest`
+locust==2.46.3
