@@ -1,0 +1,11 @@
+{
+  "id": "stroke_warning_signs",
+  "title": "Stroke Warning Signs (FAST)",
+  "tags": ["facial_drooping", "arm_weakness_one_sided", "slurred_speech", "sudden_confusion", "sudden_vision_loss", "stroke_fast_pattern"],
+  "source_note": "PLACEHOLDER CONTENT — authored for prototype purposes. Replace with reviewed clinical source content before real deployment.",
+  "body": [
+    "Stroke happens when blood flow to part of the brain is interrupted, and brain cells begin to die within minutes. Recognizing the signs quickly and getting emergency care immediately can significantly change the outcome.",
+    "The FAST acronym is commonly used to remember the main warning signs: Face drooping on one side, Arm weakness or numbness on one side, Speech that is slurred or hard to understand, and Time to call emergency services the moment any of these appear.",
+    "Other signs can include sudden confusion, sudden trouble seeing in one or both eyes, sudden severe headache with no known cause, or sudden trouble walking or loss of balance. These symptoms should never be 'waited out' — even if they resolve on their own, a temporary episode can be a warning sign of a larger stroke to come and still requires urgent evaluation."
+  ]
+}
