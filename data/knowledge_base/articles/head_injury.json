@@ -1,0 +1,18 @@
+{
+  "id": "head_injury",
+  "title": "Head Injury: When It Needs Emergency Care",
+  "tags": [
+    "head_injury",
+    "repeated_vomiting",
+    "severe_head_injury"
+  ],
+  "source_note": "PLACEHOLDER CONTENT — authored for prototype purposes. Before any real deployment, replace with reviewed excerpts from a licensed/verified source (e.g. CDC, MedlinePlus, or a clinical partner) and store the actual citation here.",
+  "body": [
+    "Most bumps to the head are minor, but a head injury combined with loss of consciousness (even briefly), repeated vomiting, worsening confusion, a severe or worsening headache, unequal pupil size, or a seizure needs emergency evaluation — these can be signs of bleeding or swelling inside the skull, which can worsen quickly.",
+    "Repeated vomiting after a head injury is treated as a red flag on its own, even without other symptoms, because it can be an early sign of rising pressure inside the skull. A single episode of vomiting shortly after an injury is more common and less specific, but vomiting that continues or restarts should prompt the same urgency as the other warning signs above.",
+    "Symptoms after a head injury can sometimes take hours to appear, so someone who was hit on the head should be watched closely for the following 24 hours even if they initially seem fine. If any of the warning signs above appear at any point, call emergency services or go to the nearest emergency room rather than waiting to see if things improve."
+  ],
+  "reviewed": false,
+  "source_type": "placeholder",
+  "added_date": "2026-08-18"
+}
