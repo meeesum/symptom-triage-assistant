@@ -1,0 +1,12 @@
+{
+  "id": "allergic_reaction_es",
+  "title": "Reacciones Alérgicas Graves (Anafilaxia)",
+  "tags": ["throat_swelling", "difficulty_breathing_severe", "widespread_hives_with_swelling", "anaphylaxis_pattern"],
+  "language": "es",
+  "source_note": "CONTENIDO DE MARCADOR DE POSICIÓN — traducción no revisada clínicamente del artículo en inglés 'allergic_reaction'. Reemplazar con contenido clínico revisado antes de cualquier despliegue real.",
+  "body": [
+    "La anafilaxia es una reacción alérgica grave y potencialmente mortal que puede desarrollarse en minutos tras la exposición a un desencadenante como alimentos, picaduras de insectos, medicamentos o látex.",
+    "Las señales de alerta incluyen hinchazón de la garganta, la lengua o la cara, dificultad para respirar o tragar, ronchas generalizadas combinadas con hinchazón, una caída repentina de la presión arterial, mareos, o una sensación de muerte inminente.",
+    "Si alguien tiene una alergia grave conocida y lleva un autoinyector de epinefrina, debe usarse de inmediato ante la primera señal de una reacción grave, seguido inmediatamente de una llamada a los servicios de emergencia — la epinefrina es sensible al tiempo y puede necesitarse una segunda dosis o atención adicional incluso después de que los síntomas mejoren."
+  ]
+}
