@@ -1,0 +1,12 @@
+{
+  "id": "common_cold_cough_es",
+  "title": "Resfriado Común, Tos y Dolor de Garganta",
+  "tags": ["cough", "sore_throat", "runny_nose", "mild_fatigue", "default_mild_acute"],
+  "language": "es",
+  "source_note": "CONTENIDO DE MARCADOR DE POSICIÓN — traducción no revisada clínicamente del artículo en inglés 'common_cold_cough'. Reemplazar con contenido clínico revisado antes de cualquier despliegue real.",
+  "body": [
+    "Una tos leve, dolor de garganta o nariz que moquea que se desarrolla gradualmente y no viene acompañada de fiebre alta, dolor intenso o dificultad para respirar, se debe con mayor frecuencia a un resfriado común u otra enfermedad viral leve.",
+    "Estos síntomas suelen resolverse por sí solos y mejorar en una o dos semanas con descanso, líquidos y alivio de síntomas de venta libre. Los líquidos calientes, las pastillas para la garganta y el sueño adecuado son medidas de apoyo comúnmente recomendadas.",
+    "Vale la pena considerar una visita a un profesional de salud si los síntomas duran más de 10 días sin mejorar, empeoran significativamente después de haber mejorado inicialmente, o vienen acompañados de fiebre alta, dificultad para respirar, dolor de pecho, o síntomas que interfieren de forma significativa con las actividades diarias."
+  ]
+}
