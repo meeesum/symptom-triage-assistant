@@ -1,0 +1,18 @@
+{
+  "id": "severe_bleeding",
+  "title": "Severe Bleeding: Uncontrolled Bleeding, Coughing or Vomiting Blood",
+  "tags": [
+    "uncontrolled_bleeding",
+    "coughing_up_large_blood",
+    "vomiting_large_blood"
+  ],
+  "source_note": "PLACEHOLDER CONTENT — authored for prototype purposes. Before any real deployment, replace with reviewed excerpts from a licensed/verified source (e.g. MedlinePlus, CDC, or a clinical partner) and store the actual citation here.",
+  "body": [
+    "Bleeding that does not slow or stop after several minutes of firm, direct pressure — from an injury, a nosebleed, or any other source — is a medical emergency. So is coughing up a significant amount of blood (more than streaks or specks in mucus) or vomiting blood, which can appear bright red or look like dark coffee grounds.",
+    "Large volumes of blood loss, whether external or internal, can lead to shock — a dangerous drop in blood pressure that starves the body's organs of oxygen. Warning signs of shock include a rapid heartbeat, cold and clammy skin, dizziness, confusion, or fainting, and can develop quickly even if the person initially seems alert.",
+    "For uncontrolled external bleeding, apply firm, continuous direct pressure with a clean cloth while calling emergency services — do not repeatedly lift the cloth to check, as this disrupts clotting. Coughing up or vomiting a significant amount of blood needs emergency evaluation even if the person otherwise feels okay, since the underlying cause is not something that can be assessed safely at home."
+  ],
+  "reviewed": false,
+  "source_type": "placeholder",
+  "added_date": "2026-08-18"
+}
