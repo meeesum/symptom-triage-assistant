@@ -1,0 +1,20 @@
+{
+  "id": "cardiac_warning_signs",
+  "title": "Cardiac Warning Signs: Shortness of Breath, Sweating, Nausea, and Radiating Pain",
+  "tags": [
+    "shortness_of_breath",
+    "sweating",
+    "pain_radiating_arm_jaw",
+    "nausea",
+    "cardiac_event_pattern"
+  ],
+  "source_note": "PLACEHOLDER CONTENT — authored for prototype purposes. Before any real deployment, replace with reviewed excerpts from a licensed/verified source (e.g. MedlinePlus, CDC, or a clinical partner) and store the actual citation here.",
+  "body": [
+    "Shortness of breath, cold sweating, nausea, and pain that spreads from the chest into the arm, jaw, neck, or back are the classic associated symptoms of a heart attack. Any one of these on its own has many possible causes, but appearing together — especially alongside chest pain or pressure — is a pattern that should be treated as a medical emergency.",
+    "These accompanying symptoms matter because heart attacks do not always present as sudden, dramatic chest pain. Some people, particularly women, older adults, and people with diabetes, experience a heart attack mainly as shortness of breath, nausea, or unusual fatigue with only mild or no chest discomfort at all. Dismissing these symptoms because \"the chest pain isn't bad\" can delay life-saving treatment.",
+    "If shortness of breath, sweating, nausea, or arm/jaw pain appear suddenly, together, or alongside any chest discomfort, call emergency services rather than waiting to see if symptoms pass or trying to drive to a hospital. Early treatment for a heart attack significantly improves outcomes, and the safest assumption when this pattern appears is that it could be cardiac in origin until a clinician says otherwise."
+  ],
+  "reviewed": false,
+  "source_type": "placeholder",
+  "added_date": "2026-08-18"
+}
