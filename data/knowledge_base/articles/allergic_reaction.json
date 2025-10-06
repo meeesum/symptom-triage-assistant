@@ -1,0 +1,11 @@
+{
+  "id": "allergic_reaction",
+  "title": "Severe Allergic Reactions (Anaphylaxis)",
+  "tags": ["throat_swelling", "difficulty_breathing_severe", "widespread_hives_with_swelling", "anaphylaxis_pattern"],
+  "source_note": "PLACEHOLDER CONTENT — authored for prototype purposes. Replace with reviewed clinical source content before real deployment.",
+  "body": [
+    "Anaphylaxis is a severe, potentially life-threatening allergic reaction that can develop within minutes of exposure to a trigger such as food, insect stings, medication, or latex.",
+    "Warning signs include swelling of the throat, tongue, or face, difficulty breathing or swallowing, widespread hives combined with swelling, a sudden drop in blood pressure, dizziness, or a feeling of impending doom.",
+    "If someone has a known severe allergy and carries an epinephrine auto-injector, it should be used immediately at the first sign of a severe reaction, followed immediately by a call to emergency services — epinephrine is time-critical and a second dose or additional care may still be needed even after symptoms improve."
+  ]
+}
