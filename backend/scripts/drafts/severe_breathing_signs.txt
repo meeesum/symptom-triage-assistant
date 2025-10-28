@@ -1,0 +1,10 @@
+id: severe_breathing_signs
+title: Severe Breathing Difficulty: Not Able to Speak, Blue Lips or Face
+tags: cant_speak_full_sentences, blue_lips_or_face, severe_breathing_difficulty
+source_note: PLACEHOLDER CONTENT — authored for prototype purposes. Before any real deployment, replace with reviewed excerpts from a licensed/verified source (e.g. MedlinePlus, CDC, or a clinical partner) and store the actual citation here.
+
+Being unable to speak in full sentences because of breathlessness, or a bluish color around the lips, face, or fingertips, are signs that the body is not getting enough oxygen. This is different from ordinary shortness of breath with exertion — these are signs of a breathing emergency, whatever the underlying cause (severe asthma attack, choking, severe allergic reaction, a heart or lung condition, or something else).
+
+A bluish tint to the lips or face (cyanosis) can be subtle, especially on darker skin tones, where it may show more clearly on the lips, gums, around the eyes, or on the palms and soles. It should never be dismissed as "just looking pale" — it reflects a real drop in blood oxygen and needs immediate attention regardless of how the person otherwise seems to be coping.
+
+If someone cannot complete a sentence without gasping for air, or has any bluish discoloration of the lips or face, call emergency services immediately. Do not wait to see if it improves, and do not attempt to drive them yourself if there is any chance breathing could stop suddenly en route.
