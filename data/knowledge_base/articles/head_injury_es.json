@@ -1,0 +1,19 @@
+{
+  "id": "head_injury_es",
+  "title": "Lesión en la Cabeza: Cuándo Necesita Atención de Emergencia",
+  "tags": [
+    "head_injury",
+    "repeated_vomiting",
+    "severe_head_injury"
+  ],
+  "language": "es",
+  "source_note": "CONTENIDO DE MARCADOR DE POSICIÓN — traducción no revisada clínicamente del artículo en inglés 'head_injury'. Reemplazar con contenido clínico revisado antes de cualquier despliegue real.",
+  "body": [
+    "La mayoría de los golpes en la cabeza son leves, pero una lesión en la cabeza combinada con pérdida del conocimiento (incluso breve), vómitos repetidos, confusión que empeora, un dolor de cabeza intenso o que empeora, pupilas de tamaño desigual, o una convulsión necesita evaluación de emergencia — estos pueden ser señales de sangrado o hinchazón dentro del cráneo, que puede empeorar rápidamente.",
+    "Los vómitos repetidos después de una lesión en la cabeza se consideran una señal de alarma por sí solos, incluso sin otros síntomas, porque pueden ser un signo temprano de aumento de presión dentro del cráneo. Un solo episodio de vómito poco después de una lesión es más común y menos específico, pero los vómitos que continúan o reaparecen deben generar la misma urgencia que las demás señales de alarma mencionadas arriba.",
+    "Los síntomas después de una lesión en la cabeza a veces pueden tardar horas en aparecer, así que alguien que recibió un golpe en la cabeza debe ser observado de cerca durante las siguientes 24 horas, incluso si al principio parece estar bien. Si aparece cualquiera de las señales de alarma anteriores en cualquier momento, llama a los servicios de emergencia o acude a la sala de emergencias más cercana en lugar de esperar a ver si las cosas mejoran."
+  ],
+  "reviewed": false,
+  "source_type": "placeholder",
+  "added_date": "2026-08-19"
+}
