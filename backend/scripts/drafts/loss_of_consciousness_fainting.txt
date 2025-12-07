@@ -1,0 +1,10 @@
+id: loss_of_consciousness_fainting
+title: Loss of Consciousness and Fainting
+tags: loss_of_consciousness, unexplained_loss_of_consciousness
+source_note: PLACEHOLDER CONTENT — authored for prototype purposes. Before any real deployment, replace with reviewed excerpts from a licensed/verified source (e.g. MedlinePlus, CDC, or a clinical partner) and store the actual citation here.
+
+Passing out or losing consciousness — even briefly, and even if the person seems completely fine afterward — should be treated as an emergency and evaluated by a clinician. While fainting is sometimes caused by relatively benign triggers like standing up quickly, dehydration, or a strong emotional reaction, it can also be an early sign of a heart rhythm problem, a stroke, a seizure, or another serious underlying condition, and there is no reliable way to tell the difference without a medical evaluation.
+
+This is true even without any other injury or symptom present — someone does not need to have hit their head or shown other warning signs for a loss of consciousness to warrant urgent attention. The event itself, not just what caused it, is the concern.
+
+If you or someone else loses consciousness, call emergency services, even if the person recovers quickly and insists they feel fine. Note how long the person was unconscious, whether there was any shaking or jerking movement, and what was happening right before it occurred, since these details help a clinician evaluate the cause.
