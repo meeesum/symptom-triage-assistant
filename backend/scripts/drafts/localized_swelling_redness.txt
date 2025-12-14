@@ -1,0 +1,10 @@
+id: localized_swelling_redness
+title: Localized Swelling and Redness: Possible Skin or Soft-Tissue Infection
+tags: localized_swelling_redness, immunocompromised_infection_signs
+source_note: PLACEHOLDER CONTENT — authored for prototype purposes. Before any real deployment, replace with reviewed excerpts from a licensed/verified source (e.g. CDC, MedlinePlus, or a clinical partner) and store the actual citation here.
+
+Localized swelling, redness, warmth, and tenderness in one area of skin — often around a cut, insect bite, or other break in the skin — can be a sign of a bacterial skin infection such as cellulitis. Mild, small, and not rapidly worsening cases are sometimes manageable with prompt medical guidance, but infections in this category can spread quickly and are generally not something to simply wait out at home.
+
+Swelling and redness that spreads rapidly, is accompanied by fever, red streaking extending from the area, or increasing pain out of proportion to how the area looks, are signs the infection may be advancing and need prompt medical evaluation, potentially including antibiotics or further assessment.
+
+For anyone who is immunocompromised — including from certain medications, chemotherapy, or a condition affecting the immune system — any sign of a skin or soft-tissue infection should be treated as more urgent than it would be otherwise, since infections can progress faster and more seriously when the immune system's response is limited. Same-day evaluation is appropriate even for what looks like a mild, localized infection in this situation.
