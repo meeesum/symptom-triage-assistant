@@ -1,0 +1,19 @@
+{
+  "id": "headache_general",
+  "title": "Headache: General Information and Red Flags",
+  "tags": [
+    "headache",
+    "severe_headache_red_flag",
+    "persistent_mild_symptoms",
+    "default_mild_acute"
+  ],
+  "source_note": "PLACEHOLDER CONTENT — authored for prototype purposes. Before any real deployment, replace with reviewed excerpts from a licensed/verified source (e.g. MedlinePlus, CDC, or a clinical partner) and store the actual citation here.",
+  "body": [
+    "Most headaches are not a sign of anything serious and improve with rest, hydration, over-the-counter pain relief, and time. Tension headaches and migraines are the most common causes and, while they can be very uncomfortable, they are generally not dangerous on their own.",
+    "A minority of headaches are warning signs of something more serious. A sudden, severe headache described as \"the worst headache of my life\" or that reaches maximum intensity within seconds to minutes (a \"thunderclap\" headache) can indicate bleeding in the brain and needs emergency evaluation, regardless of whether it came on suddenly or built up gradually. A severe headache combined with fever and a stiff neck, confusion, vision changes, weakness on one side, or occurring after a head injury also needs urgent attention.",
+    "A mild-to-moderate headache that persists beyond a few days without other warning signs is still worth having evaluated by a primary care provider, even if it isn't an emergency — persistent headaches can have a range of causes worth investigating, from tension and dehydration to medication overuse or other underlying conditions."
+  ],
+  "reviewed": false,
+  "source_type": "placeholder",
+  "added_date": "2026-08-18"
+}
